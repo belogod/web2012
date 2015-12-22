@@ -2,8 +2,10 @@ package server;
 
 import beans.AvtorService;
 import beans.BookService;
+import beans.IzdatelstvoSevice;
 import tables.Avtor;
 import tables.Book;
+import tables.Izdatelstvo;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -16,46 +18,69 @@ import java.util.List;
 
 /**
  * Created by Belogod on 20.12.2015.
+ * Сервлет
  */
-@WebServlet(name = "WebDbServlet", urlPatterns = {"/main"})
+@WebServlet(name = "WebDbServlet", urlPatterns = {"/main", "/avtors", "/izdat"})
 public class WebDbServlet extends HttpServlet {
     @EJB
     AvtorService as;
+    @EJB
     BookService bs;
+    @EJB
+    IzdatelstvoSevice is;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String servletPath = request.getServletPath();
+        if ("/avtors".equals(servletPath)) {
+            doAvtors(request, response);
+        } else if ("/izdat".equals(servletPath)) {
+            doIzdat(request,response);
+        } else {
+            doBooks(request,response);
+        }
+
+    }
+
+    private void doBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        showBooks(request,response);
+    }
+
+    private void showBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Book> books = bs.findAll();
+        request.setAttribute("books",books);
+        request.getRequestDispatcher("/books.jsp").forward(request,response);
+    }
+
+    private void doIzdat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        showIzdatelstvo(request, response);
+    }
+
+    private void doAvtors(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("books_by_aid") != null) {
             showBooksByAvtor(request, response);
         } else {
             showAvtors(request, response);
         }
-        if (request.getParameter("izdatelstvo_by_aid") !=null){
-            showIzdatelstvo(request, response);
-        }else {
-            showBooksByAvtor(request, response);
-        }
     }
-
 
 
     private void showAvtors(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Avtor> avtors = as.findAll();
         request.setAttribute("avtors", avtors);
         request.getRequestDispatcher("/avtors.jsp").forward(request, response);
-
     }
 
     private void showBooksByAvtor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> books = bs.findAll();
+//        List<Book> books = bs.findAll();
         String books_by_aid = request.getParameter("books_by_aid");
         try {
             Integer aid = Integer.valueOf(books_by_aid);
             Avtor avtor = as.find(aid);
-            request.setAttribute("books", books);
+            request.setAttribute("avtor", avtor);
             request.getRequestDispatcher("/booksbyavtor.jsp").forward(request, response);
         } catch (NumberFormatException ex) {
             showAvtors(request, response);
@@ -63,15 +88,9 @@ public class WebDbServlet extends HttpServlet {
     }
 
     private void showIzdatelstvo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String izdatelstvo_by_aid = request.getParameter("izdatelstvo_by_aid");
-        try {
-            Integer aid = Integer.valueOf(izdatelstvo_by_aid);
-            Book book = bs.find(aid);
-            request.setAttribute("book", book);
-            request.getRequestDispatcher("/izdatelstvo.jsp").forward(request, response);
-        } catch (NumberFormatException ex) {
-            showBooksByAvtor(request, response);
-        }
+        List<Izdatelstvo> izdats = is.findAll();
+        request.setAttribute("izdats", izdats);
+        request.getRequestDispatcher("/izdatelstvo.jsp").forward(request, response);
     }
 
 }

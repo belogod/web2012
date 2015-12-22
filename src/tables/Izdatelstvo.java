@@ -8,6 +8,7 @@ import java.util.Objects;
  * Created by Belogod on 20.12.2015.
  */
 @Entity
+@NamedQuery(name = "Izdat.findAll", query = "select iz from Izdatelstvo iz")
 public class Izdatelstvo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,10 +83,6 @@ public class Izdatelstvo {
 
     @Override
     public String toString() {
-        return "Izdatelstvo{" +
-                "id=" + id +
-                ", nazvanie='" + nazvanie + '\'' +
-                ", adres='" + adres + '\'' +
-                '}';
+        return nazvanie + " (" + adres + ")";
     }
 }

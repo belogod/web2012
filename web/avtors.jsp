@@ -19,7 +19,7 @@
 <tbody>
 <c:forEach var="avtor" items="${avtors}">
     <tr>
-        <td>${avtor.id}</td><td>${avtor.name}</td><td>${avtor.comment}</td><td><a href="main?books_by_aid=${avtor.id}">книги</a></td>
+        <td>${avtor.id}</td><td>${avtor.name}</td><td>${avtor.comment}</td><td><a href="avtors?books_by_aid=${avtor.id}">книги</a></td>
     </tr>
 </c:forEach>
 </tbody>

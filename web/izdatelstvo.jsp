@@ -9,30 +9,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Издательства книги</title>
+    <title>Издательства</title>
 </head>
 <body>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Книги по автору</title>
-</head>
-<body>
-<h1>Автор: ${avtor.name}</h1>
+<h1>Издательства</h1>
 <table border="1">
     <thead>
-    <th>название</th><th>стр</th><th>издательство</th>
+    <th>название</th><th>адрес</th>
     </thead>
     <tbody>
-    <c:forEach var="book" items="${avtor.books}">
+    <c:forEach var="iz" items="${izdats}">
         <tr>
-            <td>${izdatelstvo.nazvanie}</td><td>${izdatelstvo.adres}</td>
+            <td>${iz.nazvanie}</td><td>${iz.adres}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-</body>
-</html>
-
 </body>
 </html>

@@ -10,18 +10,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Книги по автору</title>
+    <title>Все Книги</title>
 </head>
 <body>
-<h1>Автор: ${avtor.name}</h1>
 <table border="1">
     <thead>
-    <th>название</th><th>стр</th><th>издательство</th>
+    <th>автор</th><th>название</th><th>стр</th><th>издательство</th>
     </thead>
     <tbody>
-    <c:forEach var="book" items="${avtor.books}">
+    <c:forEach var="book" items="${books}">
         <tr>
-            <td>${book.nazvanie}</td><td>${book.pages}</td><td>${book.izdatelstvo}</td>
+            <td>${book.avtor.name}</td>
+            <td>${book.nazvanie}</td>
+            <td>${book.pages}</td>
+            <td>${book.izdatelstvo}</td>
         </tr>
     </c:forEach>
     </tbody>

@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <a href="avtors">Авторы</a><br/>
+  <a href="izdat">Издательства</a><br/>
+  <a href="main">Все книги</a><br/>
   </body>
 </html>
