@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * Created by Belogod on 20.12.2015.
+ *  Avtor entity
  */
 @Entity
 @NamedQuery(name = "Avtor.findAll", query = "select a from Avtor a")
