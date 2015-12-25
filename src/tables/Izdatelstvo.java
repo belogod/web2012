@@ -33,6 +33,9 @@ public class Izdatelstvo {
     @OneToMany(mappedBy = "izdatelstvo")
     private List<Book> books;
 
+    @ManyToMany(mappedBy = "izdatelstva")
+    private List<City> cities;
+
     public Integer getId() {
         return id;
     }
@@ -55,6 +58,14 @@ public class Izdatelstvo {
 
     public void setAdres(String adres) {
         this.adres = adres;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 
     @Override

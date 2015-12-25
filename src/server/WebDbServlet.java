@@ -56,7 +56,19 @@ public class WebDbServlet extends HttpServlet {
     }
 
     private void doIzdat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        showIzdatelstvo(request, response);
+        if (request.getParameter("sities_by_izdat")!=null) {
+            showCitiesOfIzdat(request, response);
+        } else {
+            showIzdatelstvo(request, response);
+        }
+    }
+
+    private void showCitiesOfIzdat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String sities_by_izdat = request.getParameter("sities_by_izdat");
+        Integer id = Integer.valueOf(sities_by_izdat);
+        Izdatelstvo izdatelstvo = is.find(id);
+        request.setAttribute("iz",izdatelstvo);
+        request.getRequestDispatcher("/showcitiesbyizdat.jsp").forward(request,response);
     }
 
     private void doAvtors(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

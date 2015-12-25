@@ -15,12 +15,12 @@
 <h1>Издательства</h1>
 <table border="1">
     <thead>
-    <th>название</th><th>адрес</th>
+    <th>название</th><th>адрес</th><th>города</th>
     </thead>
     <tbody>
     <c:forEach var="iz" items="${izdats}">
         <tr>
-            <td>${iz.nazvanie}</td><td>${iz.adres}</td>
+            <td>${iz.nazvanie}</td><td>${iz.adres}</td><td><a href="izdat?sities_by_izdat=${iz.id}">показать</a></td>
         </tr>
     </c:forEach>
     </tbody>

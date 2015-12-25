@@ -24,4 +24,8 @@ public class IzdatelstvoSevice {
         em.persist(izdatelstvo);
         return izdatelstvo;
     }
+
+    public Izdatelstvo find(Integer id) {
+        return em.find(Izdatelstvo.class, id);
+    }
 }
