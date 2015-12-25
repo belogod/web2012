@@ -12,8 +12,8 @@
     <title>Города</title>
 </head>
 <body>
-    <h1>Издательство ${iz.name}</h1>
-    <table>
+    <h1>Издательство ${iz.nazvanie}</h1>
+    <table border="1">
         <thead>
         <th>Города</th>
         </thead>

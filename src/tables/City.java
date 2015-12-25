@@ -1,14 +1,15 @@
 package tables;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.io.Serializable;
+
 import java.util.List;
 
 /**
  * Created by Yevhen on 25.12.2015.
  */
-@Entity
-public class City {
+@Entity(name = "city")
+public class City  implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

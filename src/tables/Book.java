@@ -1,14 +1,15 @@
 package tables;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Created by Belogod on 20.12.2015.
  */
-@Entity
-@NamedQuery(name = "Book.findAll", query = "select a from Book a")
-public class Book {
+@Entity(name = "book")
+@NamedQuery(name = "Book.findAll", query = "select a from book a")
+public class Book  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

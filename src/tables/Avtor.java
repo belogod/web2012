@@ -1,6 +1,7 @@
 package tables;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,9 +9,9 @@ import java.util.Objects;
  * Created by Belogod on 20.12.2015.
  *  Avtor entity
  */
-@Entity
-@NamedQuery(name = "Avtor.findAll", query = "select a from Avtor a")
-public class Avtor {
+@Entity(name = "avtor")
+@NamedQuery(name = "Avtor.findAll", query = "select a from avtor a")
+public class Avtor  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

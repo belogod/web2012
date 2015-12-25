@@ -1,15 +1,16 @@
 package tables;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by Belogod on 20.12.2015.
  */
-@Entity
-@NamedQuery(name = "Izdat.findAll", query = "select iz from Izdatelstvo iz")
-public class Izdatelstvo {
+@Entity(name = "izdatelstvo")
+@NamedQuery(name = "Izdat.findAll", query = "select iz from izdatelstvo iz")
+public class Izdatelstvo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,8 +34,17 @@ public class Izdatelstvo {
     @OneToMany(mappedBy = "izdatelstvo")
     private List<Book> books;
 
+    @JoinTable(name = "city_has_izdatelstvo")
     @ManyToMany(mappedBy = "izdatelstva")
     private List<City> cities;
+    public List<City> getCities() {
+    return cities;
+}
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
+
 
     public Integer getId() {
         return id;
@@ -60,13 +70,6 @@ public class Izdatelstvo {
         this.adres = adres;
     }
 
-    public List<City> getCities() {
-        return cities;
-    }
-
-    public void setCities(List<City> cities) {
-        this.cities = cities;
-    }
 
     @Override
     public boolean equals(Object o) {
