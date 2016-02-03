@@ -5,6 +5,7 @@ import tables.Avtor;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -18,6 +19,10 @@ public class AvtorService {
 
     public List findAll(){
         return em.createNamedQuery("Avtor.findAll").getResultList();
+    }
+
+    public List findAvtorByComment(String comment) {
+        return em.createNamedQuery("Avtor.findByComment").setParameter("comment", comment).getResultList();
     }
 
     public Avtor find(Integer id){

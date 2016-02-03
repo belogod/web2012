@@ -74,9 +74,18 @@ public class WebDbServlet extends HttpServlet {
     private void doAvtors(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("books_by_aid") != null) {
             showBooksByAvtor(request, response);
+        } else if (request.getParameter("avtors_by_comment") != null ) {
+            showAvtorsByComment(request, response);
         } else {
             showAvtors(request, response);
         }
+    }
+
+    private void showAvtorsByComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String comment = request.getParameter("comment");
+        List avtorByComment = as.findAvtorByComment(comment);
+        request.setAttribute("avtors", avtorByComment);
+        request.getRequestDispatcher("/avtors.jsp").forward(request, response);
     }
 
 

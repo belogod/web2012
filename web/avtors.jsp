@@ -24,5 +24,18 @@
 </c:forEach>
 </tbody>
 </table>
+<hr/>
+<form action="avtors" method="get">
+    <input type="hidden" name="avtors_by_comment" value="1">
+    <input type="text" name="comment">
+    <input type="submit" value="Отобрать">
+</form>
+<hr/>
+<form action="avtors" method="put">
+    <input type="hidden" name="add_avtor" value="1">
+    <input type="text" name="name"><input type="text" name="comment">
+    <input type="submit" value="Добавить">
+</form>
+
 </body>
 </html>

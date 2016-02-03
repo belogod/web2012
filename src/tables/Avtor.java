@@ -10,7 +10,10 @@ import java.util.Objects;
  *  Avtor entity
  */
 @Entity(name = "avtor")
-@NamedQuery(name = "Avtor.findAll", query = "select a from avtor a")
+@NamedQueries({
+        @NamedQuery(name = "Avtor.findAll", query = "select a from avtor a"),
+        @NamedQuery(name = "Avtor.findByComment", query = "select a from avtor a where a.comment=:comment")
+})
 public class Avtor  implements Serializable {
 
     @Id

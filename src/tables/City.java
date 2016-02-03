@@ -46,9 +46,10 @@ public class City  implements Serializable {
                 '}';
     }
 
-    @JoinTable(name = "city_has_izdatelstvo", joinColumns = {
-            @JoinColumn(name = "city_id", referencedColumnName = "id")}, inverseJoinColumns = {
-            @JoinColumn(name = "izdatelstvo_id", referencedColumnName = "id")})
+    @JoinTable(name = "city_has_izdatelstvo",
+            joinColumns = { @JoinColumn(name = "city_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "izdatelstvo_id", referencedColumnName = "id")}
+    )
     @ManyToMany
     private List<Izdatelstvo> izdatelstva;
 
