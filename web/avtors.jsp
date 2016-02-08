@@ -33,7 +33,7 @@
     <input type="submit" value="Отобрать">
 </form>
 <hr/>
-<form action="avtors" method="put">
+<form action="avtors" method="post">
     <input type="hidden" name="add_avtor" value="1">
     <label for="name">Имя автора:</label>
     <input type="text" name="name" id="name">

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Belogod on 20.12.2015.
  * Сервлет
  */
-@WebServlet(name = "WebDbServlet", urlPatterns = {"/main", "/avtors", "/izdat"})
+@WebServlet(name = "WebDbServlet", urlPatterns = {"/main", "/avtors", "/izdat", "/books"})
 public class WebDbServlet extends HttpServlet {
     @EJB
     AvtorService as;
@@ -30,7 +30,18 @@ public class WebDbServlet extends HttpServlet {
     IzdatelstvoSevice is;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("add_avtor")!=null) {
+            addAvtor(request, response);
+        } else if (request.getParameter("add_book")!=null) {
+            addBook(request, response, 2);
+        }
+    }
 
+    private void addAvtor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String comment = request.getParameter("comment");
+        as.create(name, comment);
+        response.sendRedirect("avtors");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,10 +50,36 @@ public class WebDbServlet extends HttpServlet {
             doAvtors(request, response);
         } else if ("/izdat".equals(servletPath)) {
             doIzdat(request,response);
+        } else if ("/books".equals(servletPath)){
+            addBook(request, response, 1);
         } else {
             doBooks(request,response);
         }
 
+    }
+
+    private void addBook(HttpServletRequest request, HttpServletResponse response, int stage) throws ServletException, IOException {
+        if (stage == 1) {
+            List avtors = as.findAll();
+            List izdats = is.findAll();
+            request.setAttribute("avtors", avtors);
+            request.setAttribute("izdats", izdats);
+            request.getRequestDispatcher("/addbook.jsp").forward(request, response);
+        } else {
+            Integer avtorId = Integer.valueOf(request.getParameter("avtor_select"));
+            String nazvanie = request.getParameter("book_title");
+            Integer pages = Integer.valueOf(request.getParameter("book_pages"));
+            Integer izdatId = Integer.valueOf(request.getParameter("izdat_select"));
+            Avtor avtor;
+            if (avtorId!=-1) {
+                avtor = as.find(avtorId);
+            } else {
+                avtor = as.create(request.getParameter("altavtor"),"");
+            }
+            Izdatelstvo izdat = is.find(izdatId);
+            bs.create(nazvanie, pages, avtor, izdat);
+            response.sendRedirect("main");
+        }
     }
 
     private void doBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

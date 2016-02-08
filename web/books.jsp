@@ -28,5 +28,5 @@
     </c:forEach>
     </tbody>
 </table>
-</body>
+<a href="books?add=1" title="Новая книга">Добавить</a></body>
 </html>

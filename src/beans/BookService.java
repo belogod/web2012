@@ -1,6 +1,8 @@
 package beans;
 
+import tables.Avtor;
 import tables.Book;
+import tables.Izdatelstvo;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,8 +24,16 @@ public class BookService {
     public Book find(Integer id){
         return em.find(Book.class, id);
     }
+
     public Book create(String nazvanie, Integer pages){
         Book book = new Book(nazvanie, pages);
+        em.persist(book);
+        return book;
+    }
+    public Book create(String nazvanie, Integer pages, Avtor avtor, Izdatelstvo izdat) {
+        Book book = new Book(nazvanie, pages);
+        book.setAvtor(avtor);
+        book.setIzdatelstvo(izdat);
         em.persist(book);
         return book;
     }
