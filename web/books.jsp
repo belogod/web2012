@@ -15,7 +15,7 @@
 <body>
 <table border="1">
     <thead>
-    <th>автор</th><th>название</th><th>стр</th><th>издательство</th>
+    <th>автор</th><th>название</th><th>стр</th><th>издательство</th><th></th>
     </thead>
     <tbody>
     <c:forEach var="book" items="${books}">
@@ -24,6 +24,7 @@
             <td>${book.nazvanie}</td>
             <td>${book.pages}</td>
             <td>${book.izdatelstvo}</td>
+            <td><a href="delete?book_id=${book.id}">удалить</a></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Belogod on 20.12.2015.
  * Сервлет
  */
-@WebServlet(name = "WebDbServlet", urlPatterns = {"/main", "/avtors", "/izdat", "/books"})
+@WebServlet(name = "WebDbServlet", urlPatterns = {"/main", "/avtors", "/izdat", "/books", "/delete"})
 public class WebDbServlet extends HttpServlet {
     @EJB
     AvtorService as;
@@ -37,13 +37,6 @@ public class WebDbServlet extends HttpServlet {
         }
     }
 
-    private void addAvtor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String comment = request.getParameter("comment");
-        as.create(name, comment);
-        response.sendRedirect("avtors");
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String servletPath = request.getServletPath();
         if ("/avtors".equals(servletPath)) {
@@ -52,10 +45,28 @@ public class WebDbServlet extends HttpServlet {
             doIzdat(request,response);
         } else if ("/books".equals(servletPath)){
             addBook(request, response, 1);
+        } else if ("/delete".equals(servletPath)) {
+            if (request.getParameter("book_id")!=null) {
+                deleteBook(request, response);
+            }
         } else {
             doBooks(request,response);
         }
 
+    }
+
+    private void addAvtor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String comment = request.getParameter("comment");
+        as.create(name, comment);
+        response.sendRedirect("avtors");
+    }
+
+
+    private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer book_id = Integer.valueOf(request.getParameter("book_id"));
+        bs.remove(book_id);
+        response.sendRedirect("main");
     }
 
     private void addBook(HttpServletRequest request, HttpServletResponse response, int stage) throws ServletException, IOException {
