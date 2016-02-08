@@ -3,5 +3,6 @@
 
     <persistence-unit name="NewPersistenceUnit">
      <jta-data-source>jdbc/homelibrary</jta-data-source>
+
     </persistence-unit>
 </persistence>

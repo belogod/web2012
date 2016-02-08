@@ -10,9 +10,10 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<table border="1">
+<table class="red">
     <thead>
      <tr>
         <th></th><th></th><th></th><th></th>

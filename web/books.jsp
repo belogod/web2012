@@ -11,9 +11,10 @@
 <html>
 <head>
     <title>Все Книги</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<table border="1">
+<table>
     <thead>
     <th>автор</th><th>название</th><th>стр</th><th>издательство</th><th></th>
     </thead>
