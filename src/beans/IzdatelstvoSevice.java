@@ -28,4 +28,9 @@ public class IzdatelstvoSevice {
     public Izdatelstvo find(Integer id) {
         return em.find(Izdatelstvo.class, id);
     }
+
+    public void remove(Integer id) {
+        Izdatelstvo izdatelstvo = em.find(Izdatelstvo.class, id);
+        em.remove(izdatelstvo);
+    }
 }

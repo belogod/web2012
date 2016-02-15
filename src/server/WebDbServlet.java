@@ -43,23 +43,47 @@ public class WebDbServlet extends HttpServlet {
             doAvtors(request, response);
         } else if ("/izdat".equals(servletPath)) {
             doIzdat(request,response);
-        } else if ("/books".equals(servletPath)){
+        } else if ("/delete".equals(servletPath)){
+                if (request.getParameter("iz_id")!=null){
+                    deleteIzdatelstvo(request, response);
+                }
+            }
+            else {
+                doIzdat(request, response);
+            }
+
+
+
+
+
+       if ("/books".equals(servletPath)){
             addBook(request, response, 1);
         } else if ("/delete".equals(servletPath)) {
             if (request.getParameter("book_id")!=null) {
                 deleteBook(request, response);
             }
-        } else {
+        }
+        else {
             doBooks(request,response);
         }
 
+
+
     }
+
+
 
     private void addAvtor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String comment = request.getParameter("comment");
         as.create(name, comment);
         response.sendRedirect("avtors");
+    }
+
+    private void deleteIzdatelstvo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer iz_id = Integer.valueOf(request.getParameter("iz_id"));
+        is.remove(iz_id);
+        response.sendRedirect("main");
     }
 
 

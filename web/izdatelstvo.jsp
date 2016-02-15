@@ -21,6 +21,8 @@
     <c:forEach var="iz" items="${izdats}">
         <tr>
             <td>${iz.nazvanie}</td><td>${iz.adres}</td><td><a href="izdat?sities_by_izdat=${iz.id}">показать</a></td>
+
+            <td><a href="delete?iz_id=${iz.id}">удалить</a> </td>
         </tr>
     </c:forEach>
     </tbody>
