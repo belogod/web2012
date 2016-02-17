@@ -2,9 +2,11 @@ package server;
 
 import beans.AvtorService;
 import beans.BookService;
+import beans.CityService;
 import beans.IzdatelstvoSevice;
 import tables.Avtor;
 import tables.Book;
+import tables.City;
 import tables.Izdatelstvo;
 
 import javax.ejb.EJB;
@@ -28,13 +30,33 @@ public class WebDbServlet extends HttpServlet {
     BookService bs;
     @EJB
     IzdatelstvoSevice is;
+    @EJB
+    CityService cs;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if ("/izdat".equals(request.getServletPath())) {
+            if (request.getParameter("addcityforizdat")!=null) {
+                addCityForIzdat(request,response);
+            }
+        } else
+        if ("/avtors".equals(request.getServletPath())) {
+            editAvtor(request, response, 2);
+        } else
         if (request.getParameter("add_avtor")!=null) {
             addAvtor(request, response);
         } else if (request.getParameter("add_book")!=null) {
             addBook(request, response, 2);
         }
+    }
+
+    private void addCityForIzdat(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer cityId = Integer.valueOf(request.getParameter("city_select"));
+        Integer izdatId = Integer.valueOf(request.getParameter("addcityforizdat"));
+        Izdatelstvo izdatelstvo = is.find(izdatId);
+        City city = cs.find(cityId);
+        izdatelstvo.getCities().add(city);
+        is.edit(izdatelstvo);
+        response.sendRedirect("izdat");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,29 +68,14 @@ public class WebDbServlet extends HttpServlet {
         } else if ("/delete".equals(servletPath)){
                 if (request.getParameter("iz_id")!=null){
                     deleteIzdatelstvo(request, response);
+                } else if (request.getParameter("book_id")!=null) {
+                    deleteBook(request, response);
                 }
-            }
-            else {
-                doIzdat(request, response);
-            }
-
-
-
-
-
-       if ("/books".equals(servletPath)){
+        } else if ("/books".equals(servletPath)){
             addBook(request, response, 1);
-        } else if ("/delete".equals(servletPath)) {
-            if (request.getParameter("book_id")!=null) {
-                deleteBook(request, response);
-            }
-        }
-        else {
+        } else {
             doBooks(request,response);
         }
-
-
-
     }
 
 
@@ -130,9 +137,21 @@ public class WebDbServlet extends HttpServlet {
     private void doIzdat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("sities_by_izdat")!=null) {
             showCitiesOfIzdat(request, response);
+        } else if (request.getParameter("addcitybyizdat_id")!=null) {
+            addCityByIzdat(request,response);
         } else {
             showIzdatelstvo(request, response);
         }
+    }
+
+    private void addCityByIzdat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer iid = Integer.valueOf(request.getParameter("addcitybyizdat_id"));
+        Izdatelstvo izdatelstvo = is.find(iid);
+        List<City> cities = cs.findAll();
+        cities.removeAll(izdatelstvo.getCities());
+        request.setAttribute("izdat", izdatelstvo);
+        request.setAttribute("cities", cities);
+        request.getRequestDispatcher("/selectandaddcity.jsp").forward(request,response);
     }
 
     private void showCitiesOfIzdat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -148,8 +167,30 @@ public class WebDbServlet extends HttpServlet {
             showBooksByAvtor(request, response);
         } else if (request.getParameter("avtors_by_comment") != null ) {
             showAvtorsByComment(request, response);
+        } else if (request.getParameter("edit_aid") != null) {
+            editAvtor(request,response,1);
         } else {
             showAvtors(request, response);
+        }
+    }
+
+    private void editAvtor(HttpServletRequest request, HttpServletResponse response, int phase) throws ServletException, IOException {
+        Integer aid = Integer.valueOf(request.getParameter("edit_aid"));
+        Avtor avtor = as.find(aid);
+        if (phase == 1) {
+            request.setAttribute("avtor", avtor);
+            request.getRequestDispatcher("editavtor.jsp").forward(request, response);
+        } else if (phase == 2){
+            String avtorname = request.getParameter("avtorname");
+            String avtorcomment = request.getParameter("avtorcomment");
+            if (!(avtorname.equals(avtor.getName()) || avtorname.isEmpty())) {
+                avtor.setName(avtorname);
+            }
+            if (!(avtorcomment.isEmpty() || avtorcomment.equals(avtor.getComment()))) {
+                avtor.setComment(avtorcomment);
+            }
+            as.edit(avtor);
+            response.sendRedirect("avtors");
         }
     }
 

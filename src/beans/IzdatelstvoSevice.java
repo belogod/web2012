@@ -33,4 +33,8 @@ public class IzdatelstvoSevice {
         Izdatelstvo izdatelstvo = em.find(Izdatelstvo.class, id);
         em.remove(izdatelstvo);
     }
+
+    public void edit(Izdatelstvo izdatelstvo) {
+        em.merge(izdatelstvo);
+    }
 }

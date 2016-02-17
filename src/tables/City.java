@@ -4,10 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Yevhen on 25.12.2015.
  */
+@NamedQuery(name = "City.findAll", query = "select c from city c")
 @Entity(name = "city")
 public class City  implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,5 +61,20 @@ public class City  implements Serializable {
 
     public void setIzdatelstva(List<Izdatelstvo> izdatelstva) {
         this.izdatelstva = izdatelstva;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+        City city = (City) o;
+        return Objects.equals(id, city.id) &&
+                Objects.equals(name, city.name) &&
+                Objects.equals(izdatelstva, city.izdatelstva);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, izdatelstva);
     }
 }

@@ -33,4 +33,8 @@ public class AvtorService {
         em.persist(avtor);
         return avtor;
     }
+
+    public void edit(Avtor avtor) {
+        em.merge(avtor);
+    }
 }

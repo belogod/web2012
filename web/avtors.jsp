@@ -13,16 +13,17 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<table class="red">
+<table>
     <thead>
      <tr>
-        <th></th><th></th><th></th><th></th>
+        <th>id</th><th></th><th></th><th></th><th></th>
      </tr>
     </thead>
 <tbody>
 <c:forEach var="avtor" items="${avtors}">
     <tr>
         <td>${avtor.id}</td><td>${avtor.name}</td><td>${avtor.comment}</td><td><a href="avtors?books_by_aid=${avtor.id}">книги</a></td>
+        <td><a href="avtors?edit_aid=${avtor.id}">Изменить</a></td>
     </tr>
 </c:forEach>
 </tbody>

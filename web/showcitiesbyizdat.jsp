@@ -25,5 +25,6 @@
         </c:forEach>
         </tbody>
     </table>
+    <a href="izdat?addcitybyizdat_id=${iz.id}">Добавить город</a>
 </body>
 </html>

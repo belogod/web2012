@@ -15,7 +15,7 @@
 <h1>Издательства</h1>
 <table border="1">
     <thead>
-    <th>название</th><th>адрес</th><th>города</th>
+    <th>название</th><th>адрес</th><th>города</th><th></th>
     </thead>
     <tbody>
     <c:forEach var="iz" items="${izdats}">
