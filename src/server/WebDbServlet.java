@@ -38,12 +38,10 @@ public class WebDbServlet extends HttpServlet {
             if (request.getParameter("addcityforizdat")!=null) {
                 addCityForIzdat(request,response);
             }
-        } else
-        if ("/avtors".equals(request.getServletPath())) {
-            editAvtor(request, response, 2);
-        } else
-        if (request.getParameter("add_avtor")!=null) {
+        } else if (request.getParameter("add_avtor")!=null) {
             addAvtor(request, response);
+        } else if ("/avtors".equals(request.getServletPath())) {
+            editAvtor(request, response, 2);
         } else if (request.getParameter("add_book")!=null) {
             addBook(request, response, 2);
         }
