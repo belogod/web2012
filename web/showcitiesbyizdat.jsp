@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Города</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <h1>Издательство ${iz.nazvanie}</h1>

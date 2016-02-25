@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Добавить город издательства</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <h1>Издательство: ${izdat.nazvanie}</h1>

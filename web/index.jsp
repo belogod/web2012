@@ -9,6 +9,7 @@
 <html>
   <head>
     <title>$Title$</title>
+    <link href="style.css" rel="stylesheet">
   </head>
   <body>
   <a href="avtors">Авторы</a><br/>

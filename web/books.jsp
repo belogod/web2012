@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Все Книги</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
 <table>

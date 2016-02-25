@@ -10,13 +10,16 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="style.css" rel="stylesheet">
+
+
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <table>
     <thead>
      <tr>
-        <th>id</th><th></th><th></th><th></th><th></th>
+        <th>Номер п\п</th><th>Имя</th><th>Коментарии</th><th>Книги автора</th><th>Удалить</th>
      </tr>
     </thead>
 <tbody>

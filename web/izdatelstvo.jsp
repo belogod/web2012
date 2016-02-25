@@ -11,6 +11,7 @@
 <head>
     <title>Издательства</title>
 </head>
+<link href="style.css" rel="stylesheet">
 <body>
 <h1>Издательства</h1>
 <table border="1">

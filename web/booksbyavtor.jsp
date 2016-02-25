@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Книги по автору</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
 <h1>Автор: ${avtor.name}</h1>

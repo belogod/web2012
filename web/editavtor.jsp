@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Изменить автора</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <form action="avtors" method="post">

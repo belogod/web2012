@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Новая книга</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
 <form action="books" method="post">
